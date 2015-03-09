@@ -8,3 +8,13 @@ function getTemperature() {
 		checkUserInput(inputTemperature);
 	})
 }
+
+function checkUserInput(inputTemperature) {
+	if (isNaN(inputTemperature) {
+		console.log("Please enter the input in the form of a number");
+		getTemperature();
+	} else {
+		weeklyTemperatures.push(inputTemperature);
+		checkEnd();
+	}
+}
