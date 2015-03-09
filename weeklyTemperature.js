@@ -21,9 +21,16 @@ function checkUserInput(inputTemperature) {
 
 function checkEnd() {
 	if (weeklyTemperatures.length === 7) {
-		averageTemperature();
+		console.log("Your average temperature is " + averageTemperature();
+		prompt.close();
 	} else {
 		console.log("You currently have " + weeklyTemperatures);
 		getTemperature();
 	}
+}
+
+function averageTemperaature() {
+	weeklyTemperatures.reduce(function(a,b) {
+		return a + b;
+	});
 }
