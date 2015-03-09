@@ -29,10 +29,11 @@ function checkEnd() {
 	}
 }
 
-function averageTemperaature() {
-	weeklyTemperatures.reduce(function(a,b) {
+function averageTemperature() {
+	temperatureSum = weeklyTemperatures.reduce(function(a,b) {
 		return a + b;
 	});
+	return temperatureiSum / weeklyTemperatures.lengt;h
 }
 
 getTemperature();
