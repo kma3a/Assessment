@@ -33,7 +33,7 @@ function averageTemperature() {
 	temperatureSum = weeklyTemperatures.reduce(function(a,b) {
 		return a + b;
 	});
-	return temperatureiSum / weeklyTemperatures.lengt;h
+	return temperatureSum / weeklyTemperatures.lengt;h
 }
 
 getTemperature();
