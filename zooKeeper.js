@@ -34,9 +34,13 @@ function Tiger(name) {
 		}
 	};
 	this.giveMeds = function() {
+	   if (this.healthy === false) {
 		this.tired = 7;
 		this.hungry = 5;
 		this.energy = 4;
+	  } else{
+		console.log("You can't give a healthy tiger medicine are you crazy?!?!?!?");
+	}
 	};
 }
 
@@ -56,6 +60,43 @@ function startGame() {
 	var tigerName = sget("What would you like to name the tiger?").trim();
 	myTiger = new Tiger(tigerName);
 	console.log("Your name is " + zooKeeper.name + ", and your tiger's name is " + myTiger.name + ".");
+	chooseTask();
 }	
+
+function chooseTask() {
+	console.log("feed - Feeds the tiger");
+	console.log("sleep - Lets the tiger sleep");
+	console.log("train - you take time to train the tiger");
+	console.log("check health - you check the health of the tiger");
+	console.log("give meds - gives the tiger meds.");
+	console.log("exit - quits the game");
+	var userInput = sget("What would you like to do? ").trim();
+	switch (userInput) {
+		case "feed":
+		myTiger.feed();
+		myTiger.checkHealth();
+		break;
+		case "sleep":
+		myTiger.sleep();
+		myTiger.checkHealth();
+		break;
+		case "train":
+		myTiger.learn();
+		myTiger.checkHealth();
+		break;
+		case "check health":
+		myTiger.checkHealthStatus();
+		break;
+		case "give meds":
+		myTiger.giveMeds();
+		break;
+		case "exit":
+		break;
+		default: 
+		console.log("You can't do that.");
+		chooseTask();
+		break;
+	}
+}
 
 startGame();
