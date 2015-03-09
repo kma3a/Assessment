@@ -30,10 +30,9 @@ function checkEnd() {
 }
 
 function averageTemperature() {
-	var temperatureSum = 0;
-	weeklyTemperatures.forEach(function(number) {
-		temperatureSum += Number(number);
-	});
+	var temperatureSum = weeklyTemperatures.reduce(function(total, number) {
+		return total + Number(number);
+	},0);
 	console.log(typeof temperatureSum);
 	return temperatureSum / weeklyTemperatures.length
 }
