@@ -6,6 +6,11 @@ function Tiger(name) {
 	this.energy = 3;
 	this.healthy = true;
 	this.tired = 5;
+	this.sleep = function(){
+		this.hungry -=2;
+		this.tired -=2;
+		this.energy += 1;
+	}
 }
 
 function Player(name) {
