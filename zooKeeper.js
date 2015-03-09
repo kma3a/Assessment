@@ -21,13 +21,20 @@ function Tiger(name) {
 		this.energy += 3;
 		this.tired +=1;
 	};
-	this.checkHealth = function() {
+	this.checkHealthStatus = function() {
 		console.log(this.name + " the Tiger is: ");
 		console.log("Tired: " + this.tired ):
 		console.log("Energy: " + this.energy ):
 		console.log("Hungry: " + this.hungry ):
 		console.log("Healthy: " + this.healthy ):
 	};
+	this.checkHealth = function() {
+		if (this.energy <2 || this.tired > 9 || this.hungry > 9) {
+			this.healthy = false;
+		} else {
+			this.healthy = true;
+		}
+	}
 }
 
 function Player(name) {
