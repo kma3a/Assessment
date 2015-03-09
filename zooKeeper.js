@@ -11,6 +11,11 @@ function Tiger(name) {
 		this.tired -=2;
 		this.energy += 1;
 	}
+	this.learn = function() {
+		this.energy -=2;
+		this.tired -= 2;
+		this.hungry -=1;
+	}
 }
 
 function Player(name) {
