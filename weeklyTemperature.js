@@ -33,7 +33,6 @@ function averageTemperature() {
 	var temperatureSum = weeklyTemperatures.reduce(function(total, number) {
 		return total + Number(number);
 	},0);
-	console.log(typeof temperatureSum);
 	return temperatureSum / weeklyTemperatures.length
 }
 
