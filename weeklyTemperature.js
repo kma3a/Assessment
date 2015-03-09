@@ -10,7 +10,7 @@ function getTemperature() {
 }
 
 function checkUserInput(inputTemperature) {
-	if (isNaN(inputTemperature) {
+	if (isNaN(inputTemperature)) {
 		console.log("Please enter the input in the form of a number");
 		getTemperature();
 	} else {
