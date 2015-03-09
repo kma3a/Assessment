@@ -31,10 +31,13 @@ function Tiger(name) {
 	this.checkHealth = function() {
 		if (this.energy <2 || this.tired > 9 || this.hungry > 9) {
 			this.healthy = false;
-		} else {
-			this.healthy = true;
 		}
-	}
+	};
+	this.giveMeds = function() {
+		this.tired = 7;
+		this.hungry = 5;
+		this.energy = 4;
+	};
 }
 
 function Player(name) {
