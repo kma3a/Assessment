@@ -21,4 +21,9 @@ function startGame() {
 	var zooKeeperName = sget("What is your name again?").trim();
 	zooKeeper = new Player(zooKeeperName);
 	console.log("Welcome " + zooKeeper.name + " You will be in charge of our new baby tiger.");
-}		
+	var tigerName = sget("What would you like to name the tiger?").trim();
+	myTiger = new Tiger(tigerName);
+	console.log("Your name is " + zooKeeper.name + ", and your tiger's name is " + myTiger.name + ".");
+}	
+
+startGame();
