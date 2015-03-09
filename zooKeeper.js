@@ -10,16 +10,24 @@ function Tiger(name) {
 		this.hungry -=2;
 		this.tired -=2;
 		this.energy += 1;
-	}
+	};
 	this.learn = function() {
 		this.energy -=2;
 		this.tired += 2;
 		this.hungry -=1;
-	}
+	};
 	this.feed = function() {
 		this.hungry -=3;
 		this.energy += 3;
 		this.tired +=1;
+	};
+	this.checkHealth = function() {
+		console.log(this.name + " the Tiger is: ");
+		console.log("Tired: " + this.tired ):
+		console.log("Energy: " + this.energy ):
+		console.log("Hungry: " + this.hungry ):
+		console.log("Healthy: " + this.healthy ):
+	};
 }
 
 function Player(name) {
