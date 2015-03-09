@@ -4,7 +4,7 @@ var prompt = readline.createInterface(process.stdin, process.stdout);
 var weeklyTemperatures = [];
 
 function getTemperature() {
-	prmopt.question("Enter the temperature: ", function(inputTemperature){
+	prompt.question("Enter the temperature: ", function(inputTemperature){
 		checkUserInput(inputTemperature);
 	})
 }
@@ -34,3 +34,5 @@ function averageTemperaature() {
 		return a + b;
 	});
 }
+
+getTemperature();
