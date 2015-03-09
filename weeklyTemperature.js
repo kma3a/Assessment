@@ -18,3 +18,12 @@ function checkUserInput(inputTemperature) {
 		checkEnd();
 	}
 }
+
+function checkEnd() {
+	if (weeklyTemperatures.length === 7) {
+		averageTemperature();
+	} else {
+		console.log("You currently have " + weeklyTemperatures);
+		getTemperature();
+	}
+}
