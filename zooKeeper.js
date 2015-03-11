@@ -80,7 +80,7 @@ function checkHealth() {
 function Player(name) {
 	this.name = name;
 	this.hasMeds = 2;
-	this.points = 30;
+	this.points = 40;
 }
 	Player.prototype.checkHaveMeds = function() {
 		return this.hasMeds > 0;
@@ -153,7 +153,7 @@ function endGameBad() {
 		return console.log("Thanks for playing. You total points are " + zooKeeper.points);
 	} else {
 		console.log("Please enter something valid.");
-		return endGameBad();
+		return arguments.callee();
 	}
 }		
 
@@ -177,7 +177,7 @@ function chooseTask() {
 	switch (userInput) {
 		case '':
 			console.log("don't hesitate take care of " + myTiger.name);
-			chooseTask();
+			arguments.callee();
 			break;
 		case '1':
 			myTiger.feed();
@@ -207,7 +207,7 @@ function chooseTask() {
 			break;
 		default: 
 			console.log("You can't do that.");
-			chooseTask();
+			arguments.callee();
 			break;
 	}
 }
