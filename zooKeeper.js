@@ -2,31 +2,31 @@ var sget = require('sget');
 
 function Tiger(name) {
 	this.name = name;
-	this.hungry = 3;
-	this.energy = 3;
+	this.hungry = 5;
+	this.energy = 6;
 	this.healthy = true;
 	this.tired = 5;
 	this.sleep = function(){
-		this.hungry -=2;
-		this.tired -=2;
+		this.hungry +=2;
+		this.tired -=3;
 		this.energy += 1;
 	};
 	this.learn = function() {
-		this.energy -=2;
+		this.energy -=3;
 		this.tired += 2;
-		this.hungry -=1;
+		this.hungry +=1;
 	};
 	this.feed = function() {
 		this.hungry -=3;
-		this.energy += 3;
+		this.energy +=2;
 		this.tired +=1;
 	};
 	this.checkHealthStatus = function() {
 		console.log(this.name + " the Tiger is: ");
-		console.log("Tired: " + this.tired ):
-		console.log("Energy: " + this.energy ):
-		console.log("Hungry: " + this.hungry ):
-		console.log("Healthy: " + this.healthy ):
+		console.log("Tired: " + this.tired );
+		console.log("Energy: " + this.energy );
+		console.log("Hungry: " + this.hungry );
+		console.log("Healthy: " + this.healthy );
 	};
 	this.checkHealth = function() {
 		if (this.energy <2 || this.tired > 9 || this.hungry > 9) {
@@ -38,6 +38,7 @@ function Tiger(name) {
 		this.tired = 7;
 		this.hungry = 5;
 		this.energy = 4;
+		this.healthy = true;
 	  } else{
 		console.log("You can't give a healthy tiger medicine are you crazy?!?!?!?");
 	}
@@ -52,14 +53,13 @@ var zooKeeper;
 var myTiger;
 
 function startGame() {
-	console.log("Welcome to the Detroit Labs Zoo");
-	console.log("We are proud you to have you join us as a new zoo keeper");
+	console.log(" Welcome to the Detroit Labs Zoo\n We are proud you to have you join us as a new zoo keeper");
 	var zooKeeperName = sget("What is your name again?").trim();
 	zooKeeper = new Player(zooKeeperName);
-	console.log("Welcome " + zooKeeper.name + " You will be in charge of our new baby tiger.");
+	console.log(" Welcome " + zooKeeper.name + " You will be in charge of our new baby tiger.");
 	var tigerName = sget("What would you like to name the tiger?").trim();
 	myTiger = new Tiger(tigerName);
-	console.log("Your name is " + zooKeeper.name + ", and your tiger's name is " + myTiger.name + ".");
+	console.log(" Great ZooKeeper " + zooKeeper.name + ", you will be in charge of " + myTiger.name + " the Tiger.\n be careful " + myTiger.name + " might bite!.");
 	chooseTask();
 }	
 
@@ -75,28 +75,38 @@ function chooseTask() {
 		case "feed":
 		myTiger.feed();
 		myTiger.checkHealth();
+		chooseTask();
 		break;
 		case "sleep":
 		myTiger.sleep();
 		myTiger.checkHealth();
+		chooseTask();
 		break;
 		case "train":
 		myTiger.learn();
 		myTiger.checkHealth();
+		chooseTask();
 		break;
 		case "check health":
 		myTiger.checkHealthStatus();
+		chooseTask();
 		break;
 		case "give meds":
 		myTiger.giveMeds();
+		chooseTask();
 		break;
 		case "exit":
+		exitGame();
 		break;
 		default: 
 		console.log("You can't do that.");
 		chooseTask();
 		break;
 	}
+}
+
+function exitGame() {
+	console.log(myTiger.name + " Will miss you! Thanks for playing!");
 }
 
 startGame();
