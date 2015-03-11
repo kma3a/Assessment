@@ -2,6 +2,7 @@ var readline = require('readline');
 var prompt = readline.createInterface(process.stdin, process.stdout);
 
 var weeklyTemperatures = [];
+var weekLength = 7;
 
 function getTemperature() {
 	prompt.question("Enter the temperature: ", function(inputTemperature){
@@ -20,7 +21,7 @@ function checkUserInput(inputTemperature) {
 }
 
 function checkEnd() {
-	if (weeklyTemperatures.length === 7) {
+	if (weeklyTemperatures.length === weekLength) {
 		console.log("Your average temperature is " + averageTemperature());
 		prompt.close();
 	} else {
@@ -29,11 +30,13 @@ function checkEnd() {
 	}
 }
 
+
+
 function averageTemperature() {
-	var temperatureSum = weeklyTemperatures.reduce(function(total, number) {
-		return total + Number(number);
-	},0);
-	return temperatureSum / weeklyTemperatures.length
+	var temperatureSum = weeklyTemperatures.reduce(function (numberOne, numberTwo) {
+		return Number(numberOne) + Number(numberTwo);
+	});
+	return (temperatureSum / weeklyTemperatures.length).toFixed(2);
 }
 
 getTemperature();
