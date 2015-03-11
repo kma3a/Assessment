@@ -11,8 +11,8 @@ function Tiger(name) {
 
 	Tiger.prototype.sleep = function(){
 		if (this.tired > 0) {	
-			this.hungry +=2;
-			this.tired -=3;
+			this.hungry +=1;
+			this.tired -=2;
 			this.energy += 1;
 			console.log(this.name + " slept peacefully.");
 		} else {
@@ -22,8 +22,8 @@ function Tiger(name) {
 
 	Tiger.prototype.learn = function() {
 		if (this.energy > 0) {
-			this.energy -=3;
-			this.tired += 2;
+			this.energy -=2;
+			this.tired += 1;
 			this.hungry +=1;
 			console.log(this.name + " learned how to growl on command!");
 		} else {
@@ -33,8 +33,8 @@ function Tiger(name) {
 
 	Tiger.prototype.feed = function() {
 		if (this.hungry > 0 )	{
-			this.hungry -=3;
-			this.energy +=2;
+			this.hungry -=2;
+			this.energy +=1;
 			this.tired +=1;
 			console.log(this.name + " ate happyly!");
 		} else {
@@ -50,11 +50,16 @@ function Tiger(name) {
 		console.log("Healthy: " + this.healthy );
 	};
 
-	Tiger.prototype.checkHealth = function() {
-		if ( this.energy === 0 || this.tired === 10 || this.hungry === 10) {
-			this.dead = true;
-		} else if (this.energy <2 || this.tired > 9 || this.hungry > 9) {
-			this.healthy = false;
+function checkHealth() {
+		if ( myTiger.energy === 0 || myTiger.tired === 10 || myTiger.hungry === 10) {
+			myTiger.dead = true;
+			zooKeeper.points -= 70;
+		} else if (myTiger.energy <=2 || myTiger.tired >= 8 || myTiger.hungry >= 8) {
+			myTiger.healthy = false;
+			zooKeeper.points -= 35;
+		} else {
+			myTiger.healthy = true;
+			zooKeeper.points += 20;
 		}
 	};
 
@@ -75,6 +80,7 @@ function Tiger(name) {
 function Player(name) {
 	this.name = name;
 	this.hasMeds = 2;
+	this.points = 30;
 }
 	Player.prototype.checkHaveMeds = function() {
 		return this.hasMeds > 0;
@@ -97,6 +103,7 @@ function checkMeds() {
 function giveTigerMeds(){
 	if (myTiger.giveMeds()) {
 		zooKeeper.removeMeds();
+		zooKeeper.points += 10;
 		console.log("You have " + zooKeeper.hasMeds + " meds left");
 	}
 }
@@ -143,7 +150,7 @@ function endGameBad() {
 		getTigerName();
 		return chooseTask();
 	} else if (startAgain === "n") {
-		return console.log("Thanks for playing");
+		return console.log("Thanks for playing. You total points are " + zooKeeper.points);
 	} else {
 		console.log("Please enter something valid.");
 		return endGameBad();
@@ -168,19 +175,23 @@ function chooseTask() {
 	console.log("exit - quits the game");
 	var userInput = sget("What would you like to do? ").trim();
 	switch (userInput) {
+		case '':
+			console.log("don't hesitate take care of " + myTiger.name);
+			chooseTask();
+			break;
 		case '1':
 			myTiger.feed();
-			myTiger.checkHealth();
+			checkHealth();
 	 		continueGame();
 			break;
 		case '2':
 			myTiger.sleep();
-			myTiger.checkHealth();
+			checkHealth();
 			continueGame();
 			break;
 		case '3':
 			myTiger.learn();
-			myTiger.checkHealth();
+			checkHealth();
 			continueGame();
 			break;
 		case '4':
@@ -194,7 +205,6 @@ function chooseTask() {
 		case "exit":
 			exitGame();
 			break;
-		case '':
 		default: 
 			console.log("You can't do that.");
 			chooseTask();
@@ -203,7 +213,7 @@ function chooseTask() {
 }
 
 function exitGame() {
-	console.log(myTiger.name + " Will miss you! Thanks for playing!");
+	console.log(myTiger.name + " Will miss you! Your total points are " + zooKeeper.points + " Thanks for playing!");
 }
 
 startGame();
