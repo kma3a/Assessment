@@ -57,20 +57,47 @@ function Tiger(name) {
 		}
 	};
 
-	Tiger.prototype.giveMeds = function(haveMeds) {
-		if (this.healthy === false && haveMeds <= 0) {
+	Tiger.prototype.giveMeds = function() {
+		if (this.healthy === false) {
 			this.tired = 7;
 			this.hungry = 5;
 			this.energy = 4;
 			this.healthy = true;
+			console.log("You gave " + this.name + " meds and is now healthy!");
+			return true;
 	  	} else{
 			console.log("You can't give a healthy tiger medicine are you crazy?!?!?!?");
+			return false;
 		}
 	};
 
 function Player(name) {
 	this.name = name;
 	this.hasMeds = 2;
+}
+	Player.prototype.checkHaveMeds = function() {
+		return this.hasMeds > 0;
+	};
+	
+	Player.prototype.removeMeds = function() {
+		if (this.hasMeds >= 0) {
+			this.hasMeds--;
+		}
+	};
+
+function checkMeds() {
+	if (zooKeeper.checkHaveMeds()) {
+		giveTigerMeds();
+	} else {
+		console.log("You don't have meds to give " + myTiger.name);	
+	}
+}
+
+function giveTigerMeds(){
+	if (myTiger.giveMeds()) {
+		zooKeeper.removeMeds();
+		console.log("You have " + zooKeeper.hasMeds + " meds left");
+	}
 }
 
 var zooKeeper;
@@ -138,7 +165,7 @@ function chooseTask() {
 			chooseTask();
 			break;
 		case '5':
-			myTiger.giveMeds();
+			checkMeds();
 			chooseTask();
 			break;
 		case "exit":
