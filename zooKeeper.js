@@ -7,7 +7,6 @@ function Tiger(name) {
 	this.healthy = true;
 	this.tired = 5;
 	this.dead = false;
-
 }
 
 	Tiger.prototype.sleep = function(){
@@ -52,7 +51,9 @@ function Tiger(name) {
 	};
 
 	Tiger.prototype.checkHealth = function() {
-		if (this.energy <2 || this.tired > 9 || this.hungry > 9) {
+		if ( this.energy === 0 || this.tired === 10 || this.hungry === 10) {
+			this.dead = true;
+		} else if (this.energy <2 || this.tired > 9 || this.hungry > 9) {
 			this.healthy = false;
 		}
 	};
@@ -127,6 +128,28 @@ function getWord(saying) {
 	return checkValid(word);
 }
 
+function continueGame() {
+	if (myTiger.dead) {
+		return endGameBad();
+	} else {
+		return chooseTask();
+	}
+}
+
+function endGameBad() {
+	console.log( myTiger.name + " has died");
+	var startAgain = sget("Would you like to start again? (y/n)").trim();
+	if (startAgain === 'y') {
+		getTigerName();
+		return chooseTask();
+	} else if (startAgain === "n") {
+		return console.log("Thanks for playing");
+	} else {
+		console.log("Please enter something valid.");
+		return endGameBad();
+	}
+}		
+
 function checkValid(word) {
 	if (word === '') {
 		return getWord("Sorry that is not valid try again");
@@ -148,25 +171,25 @@ function chooseTask() {
 		case '1':
 			myTiger.feed();
 			myTiger.checkHealth();
-	 		chooseTask();
+	 		continueGame();
 			break;
 		case '2':
 			myTiger.sleep();
 			myTiger.checkHealth();
-			chooseTask();
+			continueGame();
 			break;
 		case '3':
 			myTiger.learn();
 			myTiger.checkHealth();
-			chooseTask();
+			continueGame();
 			break;
 		case '4':
 			myTiger.checkHealthStatus();
-			chooseTask();
+			continueGame();
 			break;
 		case '5':
 			checkMeds();
-			chooseTask();
+			continueGame();
 			break;
 		case "exit":
 			exitGame();
