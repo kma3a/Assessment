@@ -50,18 +50,6 @@ function Tiger(name) {
 		console.log("Healthy: " + this.healthy );
 	};
 
-function checkHealth() {
-		if ( myTiger.energy === 0 || myTiger.tired === 10 || myTiger.hungry === 10) {
-			myTiger.dead = true;
-			zooKeeper.points -= 70;
-		} else if (myTiger.energy <=2 || myTiger.tired >= 8 || myTiger.hungry >= 8) {
-			myTiger.healthy = false;
-			zooKeeper.points -= 35;
-		} else {
-			myTiger.healthy = true;
-			zooKeeper.points += 20;
-		}
-	};
 
 	Tiger.prototype.giveMeds = function() {
 		if (this.healthy === false) {
@@ -92,6 +80,22 @@ function Player(name) {
 		}
 	};
 
+
+
+	
+function checkHealth() {
+	if ( myTiger.energy === 0 || myTiger.tired === 10 || myTiger.hungry === 10) {
+		myTiger.dead = true;
+		zooKeeper.points -= 70;
+	} else if (myTiger.energy <=2 || myTiger.tired >= 8 || myTiger.hungry >= 8) {
+		myTiger.healthy = false;
+		zooKeeper.points -= 35;
+	} else {
+		myTiger.healthy = true;
+		zooKeeper.points += 20;
+	}
+}
+
 function checkMeds() {
 	if (zooKeeper.checkHaveMeds()) {
 		giveTigerMeds();
@@ -120,17 +124,17 @@ function startGame() {
 }	
 
 function getKeeperName() {
-	var zooKeeperName = getWord("What is your name again?");
+	var zooKeeperName = getUserInput("What is your name again?");
 	zooKeeper = new Player(zooKeeperName);
 	console.log(" Welcome " + zooKeeper.name + " You will be in charge of our new baby tiger.");
 }
 
 function getTigerName(){
-	var tigerName = getWord("What would you like to name the tiger?");
+	var tigerName = getUserInput("What would you like to name the tiger?");
 	myTiger = new Tiger(tigerName);
 }
 
-function getWord(saying) {
+function getUserInput(saying) {
 	var word = sget(saying).trim();
 	return checkValid(word);
 }
@@ -164,16 +168,22 @@ function checkValid(word) {
 		return word;
 	}
 }
-
-
-function chooseTask() {
+function displayStartGame() {
 	console.log("1 - Feeds the tiger");
 	console.log("2 - Lets the tiger sleep");
 	console.log("3 - you take time to train the tiger");
 	console.log("4 - you check the health of the tiger");
 	console.log("5 - gives the tiger meds.");
 	console.log("exit - quits the game");
-	var userInput = sget("What would you like to do? ").trim();
+}
+
+function getUserInput(saying) {
+	return sget(saying).trim();
+}
+
+function chooseTask() {
+	displayStartGame();
+	var userInput = getUserInput("What would you like to do? ");
 	switch (userInput) {
 		case '':
 			console.log("don't hesitate take care of " + myTiger.name);
