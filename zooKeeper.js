@@ -51,7 +51,7 @@ function Tiger(name) {
 	};
 
 
-	Tiger.prototype.giveMeds = function() {
+	Tiger.prototype.takeMeds = function() {
 		if (this.healthy === false) {
 			this.tired = 7;
 			this.hungry = 5;
@@ -64,6 +64,7 @@ function Tiger(name) {
 			return false;
 		}
 	};
+	
 
 function Player(name) {
 	this.name = name;
@@ -82,7 +83,7 @@ function Player(name) {
 
 
 
-	
+
 function checkHealth() {
 	if ( myTiger.energy === 0 || myTiger.tired === 10 || myTiger.hungry === 10) {
 		myTiger.dead = true;
@@ -105,7 +106,7 @@ function checkMeds() {
 }
 
 function giveTigerMeds(){
-	if (myTiger.giveMeds()) {
+	if (myTiger.takeMeds()) {
 		zooKeeper.removeMeds();
 		zooKeeper.points += 10;
 		console.log("You have " + zooKeeper.hasMeds + " meds left");
