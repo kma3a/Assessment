@@ -8,12 +8,20 @@ function getPassword() {
 }
 
 function checkPassword(userPassword) {
-	if(userPassword.length >=10 && userPassword.match(/[A-Z!]/)) {
-		console.log( userPassword + " is a valid password");
+	if( checkPasswordLength(userPassword) && checkSpecialChar(userPassword) ) {
+		console.log( "Your password is valid!");
 	} else {
-		console.log( userPassword + " is not a valid password. You must have a capital letter or an exclimation point(!) and be over 10 characters long");
+		console.log( "Your password is NOT valid. You must have a capital letter or an exclimation point(!) and be over 10 characters long");
 	}
 	prompt.close();
+}
+
+function checkPasswordLength(userPassword){
+	return userPassword.length >=10;
+}
+
+function checkSpecialChar(userPassword) {
+	return userPassword.match(/[A-Z!]/);
 }
 
 getPassword();
