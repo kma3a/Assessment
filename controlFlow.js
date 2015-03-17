@@ -14,7 +14,9 @@ function getNumbers(){
 }
 
 function sortArray(){
-	numberArray.sort();
+	numberArray.sort(function(a,b){
+		return b - a;
+	});
 	console.log(numberArray);
 }
 
